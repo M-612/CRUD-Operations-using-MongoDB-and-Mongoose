@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../api";
 import { useNavigate } from "react-router-dom";
 
+
 function StudentList() {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -13,14 +14,15 @@ function StudentList() {
 
     const fetchStudents = async () => {
         try {
-            const res = await api.get("Students");
-            setStudents(res.data);
+            const res = await api.get("/Students");
+            setStudents(res.data); // ✅ this sets data in state
         } catch (err) {
             console.error(err);
         } finally {
             setLoading(false);
         }
     };
+
 
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete?")) return;
